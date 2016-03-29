@@ -2478,6 +2478,7 @@ void usb_ehci_realize(EHCIState *s, DeviceState *dev, Error **errp)
     s->async_bh = qemu_bh_new(ehci_frame_timer, s);
     s->device = dev;
 
+    qemu_register_reset(ehci_reset, s);
     s->vmstate = qemu_add_vm_change_state_handler(usb_ehci_vm_state_change, s);
 }
 
